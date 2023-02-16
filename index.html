@@ -21,12 +21,19 @@
     <input type="text" id="new-phone-number" name="new-phone-number">
     <label for="new-email">Email</label>
     <input type="text" id="new-email" name="new-email">
+    <label>
+      <div id="addresses" >
     <label for="new-address">Address</label>
     <input type="text" id="new-address" name="new-address">
-    <label for="new-work">Work</label>
-    <input type="text" id="new-work" name="new-work">
-    <label for="new-personal">Personal</label>
-    <input type="text" id="new-personal" name="new-personal">
+    <label>
+    <input type="radio" id="is-work-address" name="isAddress" value="true">
+      Work Address
+    </label>
+    <label>
+      <input type="radio" id="is-personal-address" name="isAddress" value="false">
+      Personal Address
+    </label>
+    </div>
     <button type="submit">Add</button>
 
   </form>
