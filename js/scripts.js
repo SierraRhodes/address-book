@@ -89,11 +89,16 @@ contactsDiv.append(ul);
 
 function displayContactDetails(event) {
   const contact = addressBook.findContact(event.target.id);
+  const address = contact.findAddress(event.target.id);
   document.querySelector("#first-name").innerText = contact.firstName;
   document.querySelector("#last-name").innerText = contact.lastName;
   document.querySelector("#phone-number").innerText = contact.phoneNumber;
   document.querySelector("#email").innerText = contact.email;
   document.querySelector("#address").innerText = contact.address;
+
+  document.querySelector("#address").innerText = address.inputtedAddress;
+  document.querySelector("#work").innerHTML = address.inputtedWorkAddress ? "Yes" : "No";
+  document.querySelector("#personal").innerHTML = address.inputtedPersonalAddress ? "Yes" : "No";
 
 
  // create a new list of addresses
@@ -104,16 +109,6 @@ function displayContactDetails(event) {
  }
  document.querySelector("#address").innerHTML = addressesHtml;
  document.querySelector("div#contact-details").removeAttribute("class");
-}
-
-function displayAddressDetails(event) {
-  const contactId = event.target.getAttribute("data-contact-id");
-  const contact = addressBook.findContact(contactId);
-  const address = contact.findAddress(event.target.id);
-
-  document.querySelector("#address").innerText = address.addresses;
-  document.querySelector("#is-work-address").innerText = address.work ? "Yes" : "No";
-  document.querySelector("#is-personal-address").innerText = address.personal ? "Yes" : "No";
 }
 
 function handleFormSubmission(event) {
@@ -130,9 +125,15 @@ function handleFormSubmission(event) {
   newContact.addAddress(newAddress);
   addressBook.addContact(newContact);
   listContacts(addressBook);
+
+  const workRadioButton = document.querySelector("input#is-work-address");
+  const personalRadioButton = document.querySelector("input#is-personal-address");
+  workRadioButton.addEventListener("click", displayAddressDetails);
+  personalRadioButton.addEventListener("click", displayAddressDetails);
 }
 
 window.addEventListener("load", function (){
   document.querySelector("form#new-contact").addEventListener("submit", handleFormSubmission);
   document.querySelector("div#contacts").addEventListener("click", displayContactDetails);
+  
 });
